@@ -13,38 +13,32 @@ Saída
 Seu programa deve imprimir, na saída padrão, uma única linha, contendo o número que está faltando na sequência dada.
 Exemplos
 
-* Entrada
+Entrada
 
-3
-
-3 1			
+	3
+	3 1			
 			
 
-* Saída
+Saída
 
-2			
+	2			
+			
+Entrada
+
+	5
+	1 2 3 5
 			
 
-* Entrada
+Saída
 
-5
-
-1 2 3 5
+	4
 			
+Entrada
 
-* Saída
-
-4
+	4
+	2 4 3
 			
+Saída
 
-* Entrada
-
-4
-
-2 4 3
-			
-
-* Saída
-
-1
+	1
 			
