@@ -11,6 +11,12 @@ class Caixa():
     def __init__(self):
         self.ocupado_ate = 0
 
+    def atender(self, cliente):
+        espera = max([0, self.ocupado_ate - cliente.t])
+
+        self.ocupado_ate = cliente.t + espera + cliente.d
+        return espera
+
 class Banco():
     def __init__(self, entrada=sys.stdin):
         total_caixas, total_clientes = entrada.readline().split(" ")
@@ -23,20 +29,15 @@ class Banco():
         esperar = 0
 
         for cliente in self.clientes:
-            if self.atender(cliente) > 20:
+            if self.__iniciar_atendimento(cliente) > 20:
                 esperar = esperar + 1
 
         return esperar
 
-    def atender(self, cliente):
-        proximo_caixa = self.proximo_caixa_livre()
+    def __iniciar_atendimento(self, cliente):
+        return self.__proximo_caixa_livre().atender(cliente)
 
-        espera = max([0, proximo_caixa.ocupado_ate - cliente.t])
-
-        proximo_caixa.ocupado_ate = cliente.t + espera + cliente.d
-        return espera
-
-    def proximo_caixa_livre(self):
+    def __proximo_caixa_livre(self):
         return min(self.caixas,key=attrgetter('ocupado_ate'))
 
 if __name__ == '__main__':
