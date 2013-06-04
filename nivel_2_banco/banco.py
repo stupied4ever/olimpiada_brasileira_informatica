@@ -11,34 +11,33 @@ class Caixa():
     def __init__(self):
         self.ocupado_ate = 0
 
-    @staticmethod
-    def proximo_livre(caixas):
-        return min(caixas,key=attrgetter('ocupado_ate'))
+class Banco():
+    def __init__(self, entrada=sys.stdin):
+        total_caixas, total_clientes = entrada.readline().split(" ")
+        total_caixas, total_clientes = int(total_caixas), int(total_clientes)
 
-def identifica_index_menor_espera( caixas ):
-    return caixas.index(min(caixas))
+        self.caixas = [Caixa() for i in range(total_caixas)]
+        self.clientes = [Cliente(entrada.readline()) for linha in range(total_clientes)]
 
-def numero_clientes_insatisfeitos(entrada=sys.stdin):
-    banco = entrada.readline().split(" ")
-    caixas_abertos = [Caixa() for i in range(int(banco[0]))]
-    quando_fica_livre = [0] * int(banco[0])
-    clientes = int(banco[1])
+    def numero_clientes_insatisfeitos(self):
+        esperar = 0
 
-    limite_espera = 20
-    esperar = 0
+        for cliente in self.clientes:
+            if self.atender(cliente) > 20:
+                esperar = esperar + 1
 
-    for x in xrange(clientes):
-        cliente = Cliente(entrada.readline())
+        return esperar
 
-        # proximo_livre = identifica_index_menor_espera(quando_fica_livre)
-        proximo_caixa_livre = Caixa.proximo_livre(caixas_abertos)
+    def atender(self, cliente):
+        proximo_caixa = self.proximo_caixa_livre()
 
-        espera = max([0, proximo_caixa_livre.ocupado_ate - cliente.t])
+        espera = max([0, proximo_caixa.ocupado_ate - cliente.t])
 
-        proximo_caixa_livre.ocupado_ate = cliente.t + espera + cliente.d
+        proximo_caixa.ocupado_ate = cliente.t + espera + cliente.d
+        return espera
 
-        if espera > limite_espera:
-            esperar = esperar + 1
+    def proximo_caixa_livre(self):
+        return min(self.caixas,key=attrgetter('ocupado_ate'))
 
-    return esperar
-
+if __name__ == '__main__':
+    print Banco().numero_clientes_insatisfeitos()

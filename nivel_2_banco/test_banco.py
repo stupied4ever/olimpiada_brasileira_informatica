@@ -1,7 +1,7 @@
 import StringIO
 import unittest
 
-from banco import numero_clientes_insatisfeitos
+from banco import Banco
 import banco
 
 class TestaFilaBanco(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestaFilaBanco(unittest.TestCase):
 30 10
 """
         entrada = StringIO.StringIO(entrada)
-        self.assertEqual(numero_clientes_insatisfeitos(entrada), 1)
+        self.assertEqual(Banco(entrada).numero_clientes_insatisfeitos(), 1)
 
     def test_segundo_caso_unicamp(self):
         entrada = """3 16
@@ -34,9 +34,9 @@ class TestaFilaBanco(unittest.TestCase):
 19 10
 20 10
 23 3
-        """
+"""
         entrada = StringIO.StringIO(entrada)
-        self.assertEqual(numero_clientes_insatisfeitos(entrada), 2)
+        self.assertEqual(Banco(entrada).numero_clientes_insatisfeitos(), 2)
 
 if __name__ == '__main__':
     unittest.main()
