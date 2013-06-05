@@ -36,4 +36,8 @@ class Banco():
         return min(self.caixas,key=attrgetter('ocupado_ate'))
 
 if __name__ == '__main__':
-    print Banco().numero_clientes_insatisfeitos()
+    if len(sys.argv) >= 2:
+        with open(sys.argv[1], 'r') as reader:
+            print Banco(reader).numero_clientes_insatisfeitos()
+    else:
+        print Banco().numero_clientes_insatisfeitos()
