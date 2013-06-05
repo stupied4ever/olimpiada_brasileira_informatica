@@ -1,6 +1,11 @@
 Banco
 =====
 
+Executando
+----------
+
+```python banco.py [filename]```
+
 Fonte
 -----
 
