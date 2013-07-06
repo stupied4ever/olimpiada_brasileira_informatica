@@ -13,6 +13,13 @@ describe 'AutoCorretor' do
       it { should eq(0) }
     end
 
+     context 'faltando letras do inicio ou do fim' do
+       let(:de)  { 'ana' }
+       let(:ate) { 'a'   }
+
+       it { should eq(2) }
+     end
+
      context 'com segunda palavra faltando uma letra no fim' do
        let(:ate) { 'rafae' }
 

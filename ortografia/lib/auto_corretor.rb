@@ -8,11 +8,19 @@ class AutoCorretor
     if de.size != ate.size
       menor, maior = [de,ate].sort{|a,b| a.size <=> b.size}
       diferenca = maior.size - menor.size
+      esquerda = nil
+      direita  = nil
       if [maior[0...diferenca], menor].flatten.join == maior
-        distancia += diferenca
+        esquerda = diferenca
       end
       if [menor, maior.reverse[0...diferenca].reverse].flatten.join == maior
-        distancia += diferenca
+        direita = diferenca
+      end
+
+      if direita && esquerda
+        distancia = [esquerda, direita].sort.first
+      else
+        distancia = direita || esquerda
       end
     end
 
