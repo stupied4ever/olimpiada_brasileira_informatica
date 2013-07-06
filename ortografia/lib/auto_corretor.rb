@@ -1,0 +1,3 @@
+class AutoCorretor
+
+end
